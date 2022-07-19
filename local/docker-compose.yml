@@ -1,0 +1,15 @@
+version: '3'
+services:
+  mysql:
+    image: "appiriodevops/tc-identity-mysql:0.1.0"
+    container_name: "tc-rbac-mysqld"
+    ports:
+      - "3306:3306"
+    privileged: true
+    environment:
+      - MYSQL_DATABASE=Authorization
+      - MYSQL_USER=coder
+      - MYSQL_PASSWORD=topcoder
+      - MYSQL_ROOT_PASSWORD=topcoder
+    volumes:
+      - .:/data
