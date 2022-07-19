@@ -46,8 +46,13 @@ async function _checkIfSameNamedRoleExists(roleName) {
   * @param {Boolean} fromDb flag if query db for data or not
   * @returns {Object} the role
   */
-async function getRole(id) {
+async function getRole(currentUser, id) {
   const role = await Role.findById(id)
+  const role1 = await Role.findOne({
+    where: {
+      id
+    }
+  })
 
   return role.toJSON()
 }
@@ -69,7 +74,7 @@ async function createRole(currentUser, role) {
   // check if another Role with the same name exists.
   await _checkIfSameNamedRoleExists(role.name)
 
-  role.createdBy = await helper.getUserId(currentUser.userId)
+  role.createdBy = currentUser.userId
 
   const created = await Role.create(role)
   const entity = created.toJSON()
@@ -79,11 +84,9 @@ async function createRole(currentUser, role) {
 createRole.schema = Joi.object().keys({
   currentUser: Joi.object().required(),
   role: Joi.object().keys({
-    name: Joi.string().max(50).required(),
+    name: Joi.stringAllowEmpty(),
     description: Joi.string().max(1000),
-    listOfSkills: Joi.array().items(Joi.string().max(50).required()),
-    numberOfMembers: Joi.number().integer().min(1),
-    imageUrl: Joi.string().uri().max(255)
+
   }).required()
 }).required()
 
@@ -149,7 +152,7 @@ async function searchRoles(currentUser, criteria) {
   const filter = { [Op.and]: [] }
   // Apply name filter, allow partial match and ignore case
   if (criteria.keyword) {
-    filter[Op.and].push({ name: { [Op.iLike]: `%${criteria.keyword}%` } })
+    filter[Op.and].push({ name: { [Op.like]: `%${criteria.keyword}%` } })
   }
   const queryCriteria = {
     where: filter,

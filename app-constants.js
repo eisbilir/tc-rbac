@@ -9,11 +9,11 @@ const UserRoles = {
 
 const Scopes = {
   // role
-  READ_ROLE: '',
+  READ_ROLE: 'read:roles',
   CREATE_ROLE: '',
   UPDATE_ROLE: '',
   DELETE_ROLE: '',
-  ALL_ROLE: ''
+  ALL_ROLE: 'all:roles'
 }
 
 module.exports = {

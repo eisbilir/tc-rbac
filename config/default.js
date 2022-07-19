@@ -25,7 +25,7 @@ module.exports = {
   AUTH0_PROXY_SERVER_URL: process.env.AUTH0_PROXY_SERVER_URL,
 
   m2m: {
-    M2M_AUDIT_USER_ID: process.env.M2M_AUDIT_USER_ID || '00000000-0000-0000-0000-000000000000',
+    M2M_AUDIT_USER_ID: process.env.M2M_AUDIT_USER_ID || '00000000',
     M2M_AUDIT_HANDLE: process.env.M2M_AUDIT_HANDLE || 'TopcoderService'
   },
 
