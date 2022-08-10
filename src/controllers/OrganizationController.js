@@ -1,5 +1,5 @@
 /**
- * Controller for Role endpoints
+ * Controller for Organization endpoints
  */
 const { StatusCodes } = require('http-status-codes')
 const service = require('../services/OrganizationService')
@@ -10,7 +10,7 @@ async function getOrganization(req, res) {
   }
   
   /**
-   * Create role
+   * Create organization
    * @param req the request
    * @param res the response
    */
@@ -19,7 +19,7 @@ async function getOrganization(req, res) {
   }
   
   /**
-   * update role by id
+   * update organization by id
    * @param req the request
    * @param res the response
    */
@@ -28,7 +28,7 @@ async function getOrganization(req, res) {
   }
   
   /**
-   * Delete role by id
+   * Delete organization by id
    * @param req the request
    * @param res the response
    */
@@ -38,13 +38,13 @@ async function getOrganization(req, res) {
   }
   
   /**
-   * Search roles
+   * Search organization
    * @param req the request
    * @param res the response
    */
   async function searchOrganizations(req, res) {
     // need for pagination
-    // const result = await service.searchRoles(req.authUser, req.query)
+    // const result = await service.searchOrganizations(req.authUser, req.query)
     // helper.setResHeaders(req, res, result)
     // res.send(result.result)
     res.send(await service.searchOrganizations(req.authUser, req.query))
